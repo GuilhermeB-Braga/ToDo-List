@@ -130,21 +130,15 @@ header{
     background-color: gray;
 }
 
-#addTaskInput,
-.iconWrapper{
-    box-shadow: var(--shadow);
-}
-
 
 .addTaskWrapper{
     position: fixed;
-    bottom: 2rem;
-    height: 5rem;
+    bottom: 0;
+    height: 7rem;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border-radius: 8px;
 }
 
 .iconWrapper{

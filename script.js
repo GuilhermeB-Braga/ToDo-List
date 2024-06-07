@@ -22,8 +22,13 @@ function createTask (){
         return
 
     }else{
+
+        let newTask = {
+            TaskContent: taskValue,
+            TaskStatus: false
+        }
         
-        tasksArr.push(taskValue)
+        tasksArr.push(newTask)
         localStorage.setItem("tasksArr", JSON.stringify(tasksArr))
         
         location.reload()
@@ -44,7 +49,7 @@ function viewList() {
 
             <div class="task">
 
-                <p class="taskTitle">${task}</p>
+                <p class="taskTitle">${task.TaskContent}</p>
 
             </div>
 
@@ -61,11 +66,23 @@ function viewList() {
         const checkBox = li.querySelector(".checkBox")
         const checkedIcon = li.querySelector(".ph-check")
         const taskContainer = li.querySelector(".task")
+        
+        if(task.TaskStatus === true){
+            taskContainer.classList.toggle("checked")
+            checkBox.classList.toggle("checked")
+            checkedIcon.classList.toggle("hidden")
+        }
 
         checkBox.addEventListener("click", ()=>{
             taskContainer.classList.toggle("checked")
             checkBox.classList.toggle("checked")
             checkedIcon.classList.toggle("hidden")
+            if(task.TaskStatus === false){
+                task.TaskStatus = true
+            }else{
+                task.TaskStatus = false
+            }
+            localStorage.setItem("tasksArr", JSON.stringify(tasksArr))
         })
 
         taskContainer.addEventListener("dblclick", (event)=>{
