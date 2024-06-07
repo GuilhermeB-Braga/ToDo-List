@@ -139,6 +139,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    background:linear-gradient(to top, rgba(0, 0, 0, 0.507), transparent);
 }
 
 .iconWrapper{
@@ -151,6 +152,7 @@ header{
     padding: 1rem;
     border-radius: 8px;
     transition: var(--transition);
+    
 }
 
 .iconWrapper:hover{
