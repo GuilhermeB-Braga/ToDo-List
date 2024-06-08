@@ -1,6 +1,7 @@
 // Dom Variables
 
 let tasks = document.querySelectorAll(".taskWrapper");
+const addTaskWrapper = document.querySelector(".addTaskWrapper");
 
 const taskInput = document.querySelector("#addTaskInput");
 const addTaskButton = document.querySelector(".iconWrapper");
@@ -22,6 +23,9 @@ const themeText = document.querySelector(".darkLightMode p");
 const searchIcon = document.querySelector(".searchArea i");
 const searchInput = document.querySelector(".searchArea input");
 
+const checkEffect = document.querySelector("#checkEffect");
+const congratulationsEffect = document.querySelector("#congratulationsEffect");
+
 // Initializating Variables
 
 let tasksArr = JSON.parse(localStorage.getItem("tasksArr")) || [];
@@ -29,6 +33,27 @@ let tasksArr = JSON.parse(localStorage.getItem("tasksArr")) || [];
 let theme = JSON.parse(localStorage.getItem("theme")) || false;
 
 // Functions
+
+function appEffect(effect) {
+  checkEffect.volume = `1`;
+  checkEffect.volume = `1`;
+  navigator.vibrate(15);
+
+  switch (effect) {
+    case 1:
+      checkEffect.play();
+
+      break;
+
+    case 2:
+      congratulationsEffect.play();
+
+      break;
+
+    default:
+      break;
+  }
+}
 
 function createTask() {
   let taskValue = taskInput.value;
@@ -84,6 +109,8 @@ function viewList() {
     }
 
     checkBox.addEventListener("click", () => {
+      appEffect(congratulations());
+
       taskContainer.classList.toggle("checked");
       checkBox.classList.toggle("checked");
       checkedIcon.classList.toggle("hidden");
@@ -111,8 +138,10 @@ function removeTask(taskIndex) {
 function openCloseMenu() {
   asideMenu.classList.toggle("open");
   overlay.classList.toggle("hidden");
-  tasksSection.classList.toggle("onRight");
-  header.classList.toggle("onRight");
+  tasksSection.classList.toggle("onBack");
+  header.classList.toggle("onBack");
+  addTaskWrapper.classList.toggle("onBack");
+  body.classList.toggle("noOverflow");
 }
 
 function changeTheme() {
@@ -155,6 +184,28 @@ function searchTasks() {
       task.style.display = `none`;
     }
   });
+}
+
+function congratulations() {
+  statusArr = new Array();
+
+  tasksArr.forEach((task) => {
+    let status = task.TaskStatus;
+
+    statusArr.push(status);
+  });
+
+  let falseCount = statusArr.reduce(
+    (count, item) => (item === false ? count + 1 : count),
+    0
+  );
+  let hasExactlyOneFalse = falseCount === 1;
+
+  if (hasExactlyOneFalse) {
+    return 2;
+  } else {
+    return 1;
+  }
 }
 
 // AddEventListeners

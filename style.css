@@ -37,6 +37,10 @@ body{
     position: relative;
 }
 
+.noOverflow{
+    overflow: hidden;
+}
+
 i,
 input,
 .iconWrapper,
@@ -198,13 +202,14 @@ header{
 
 .overlay{
     height: 100%;
-    width: 100%;
+    width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0;
     left: 0;
     z-index: 9998;
-    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter:blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 .asideMenu{
@@ -258,8 +263,8 @@ header{
     gap: 1.8rem;
 }
 
-.onRight{
-    transform: translateX(60%);
+.onBack{
+    opacity: 0.4;
 }
 
 .darkLightMode.darkOn{
@@ -270,6 +275,15 @@ header{
 .asideMenu nav ul li a:hover{
     border: 1px solid var(--taskBg);
     background-color: transparent;
+    color: var(--taskBg);
+}
+
+.asideMenuTitle{
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 2rem;
+    line-height: 5rem;
     color: var(--taskBg);
 }
 
@@ -298,4 +312,14 @@ header{
 .searchInput.active{
     padding: 1rem;
     width: 100%;
+}
+
+@media (max-width: 768px){
+    .iconWrapper:hover{
+        background-color: var(--taskBg);
+    }
+    .iconWrapper:active{
+        background-color: rgb(42, 126, 9);
+    }
+
 }
