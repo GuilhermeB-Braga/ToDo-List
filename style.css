@@ -7,6 +7,8 @@
     text-decoration: none;
     list-style: none;
     -webkit-tap-highlight-color: transparent;
+    transition: var(--transition);
+
 }
 
 :root{
@@ -16,6 +18,13 @@
     --headerBg:#E1E1E1;
     --taskBg:#000000;
     --shadow: .5rem .5rem 2rem rgba(0, 0, 0, 0.253);
+}
+
+.darkTheme{
+    --headerBg: #000;
+    --taskBg: #E1E1E1;
+    transition: all 0s;
+
 }
 
 body{
@@ -32,7 +41,8 @@ i,
 input,
 .iconWrapper,
 .checkBox,
-.task{
+.task,
+.overlay{
     cursor: pointer;
 }
 
@@ -51,6 +61,7 @@ header{
 
 .title{
     font-size: 4.2rem;
+    color: var(--taskBg);
 }
 
 .iconsWrapper{
@@ -63,6 +74,8 @@ header{
 
 .iconsWrapper i{
     font-size: 2.4rem;
+    color: var(--taskBg);
+
 }
 
 /* Main */
@@ -70,10 +83,9 @@ header{
 
 .tasksSection{
     width: 100%;
-    height: 70vh;
+    height: auto;
     max-height: 100%;
-    border-radius: 2rem;
-    padding: 3.4rem 2rem;
+    padding: 3.4rem 2rem 8rem 2rem;
 }
 
 .tasksList{
@@ -118,7 +130,7 @@ header{
 
 .checkBox i{
     font-size: 2rem;
-    color: white;
+    color: var(--headerBg);
 }
 
 .task.checked{
@@ -139,11 +151,11 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background:linear-gradient(to top, rgba(0, 0, 0, 0.507), transparent);
+    background:linear-gradient(to top, var(--headerBg) 40%, transparent);
 }
 
 .iconWrapper{
-    background-color: #000000;
+    background-color: var(--taskBg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,7 +173,7 @@ header{
 
 .addTaskWrapper i{
     font-size: 2.4rem;
-    color: white;
+    color: var(--headerBg);
 }
 
 #addTaskInput{
@@ -171,8 +183,8 @@ header{
     border: none;
     outline: none;
     border-radius: 8px;
-    background-color: #000000fa;
-    color: white;
+    background-color: var(--taskBg);
+    color: var(--headerBg);
     transition: var(--transition);
 }
 
@@ -180,4 +192,110 @@ header{
 #addTaskInput:focus,
 .iconWrapper:hover{
     transform: scale(1.01);
+}
+
+/* Aside Menu */
+
+.overlay{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    backdrop-filter: blur(2px);
+}
+
+.asideMenu{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--headerBg);
+    height: 100%;
+    width: 0;
+    overflow: hidden;
+    z-index: 9999;
+    transition: var(--transition);
+    border-radius: 8px;
+}
+
+.asideMenu.open{
+    width: 60%;
+    box-shadow: 5px 5px 2rem rgba(0, 0, 0, 0.103);
+}
+
+.asideMenu nav{
+    width: 100%;
+    height: 100%;
+    padding: 1.8rem 2.8rem;
+}
+
+.asideMenu nav ul{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.asideMenu nav ul li{
+    width: 100%;
+}
+
+.asideMenu nav ul li a,
+.darkLightMode{
+    cursor: pointer;
+    width: 100%;
+    height: 3.8rem;
+    border-radius: 8px;
+    background-color: var(--taskBg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .23s ease-in-out;
+    color: var(--headerBg);
+    gap: 1.8rem;
+}
+
+.onRight{
+    transform: translateX(60%);
+}
+
+.darkLightMode.darkOn{
+    background-color: var(--taskBg);
+    color: var(--headerBg);
+}
+
+.asideMenu nav ul li a:hover{
+    border: 1px solid var(--taskBg);
+    background-color: transparent;
+    color: var(--taskBg);
+}
+
+/* Search Area */
+
+.searchArea{
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+}
+
+#searchLabel{
+    display: none;
+}
+
+.searchInput{
+    border: none;
+    outline: none;
+    background-color: var(--taskBg);
+    color: var(--headerBg);
+    border-radius: 8px;
+    height: 2.4rem;
+    width: 0%;
+}
+
+.searchInput.active{
+    padding: 1rem;
+    width: 100%;
 }
